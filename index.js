@@ -12,6 +12,7 @@ const telradButton = document.querySelector("#telrad");
 const mimosaButton = document.querySelector("#mimosa");
 const cambiumButton = document.querySelector("#cambium");
 const taranaButton = document.querySelector("#tarana");
+const apartmentsButton = document.querySelector("#apartments");
 const engineeringButton = document.querySelector("#engineeringButton");
 const clipboardConfirm = document.getElementById("clipboardConfirm");
 const settingsContainer = document.getElementById("settingsContainer");
@@ -199,6 +200,9 @@ function showInfoContainers(radio, e = { target: { id: "ubiquiti" } }) {
     case "tarana":
       currentColor = "#239664";
       break;
+    case "apartments":
+      currentColor = "#cf0a76";
+      break;
     default:
       currentColor = "#212121";
       break;
@@ -220,8 +224,6 @@ function showInfoContainers(radio, e = { target: { id: "ubiquiti" } }) {
 }
 
 function setSettingsTab() {
-  fontExample("font")
-  fontExample("notesFont")
   font.value = getComputedStyle(
     document.documentElement
   )
@@ -251,6 +253,8 @@ function setSettingsTab() {
     .trim();
   resetRadioOn.checked = settings.resetPrompt;
   resetRadioOff.checked = !settings.resetPrompt;
+  fontExample("font")
+  fontExample("notesFont")
 }
 
 function fontExample(element) {
@@ -316,6 +320,9 @@ cambiumButton.addEventListener("click", (e) =>
 );
 taranaButton.addEventListener("click", (e) =>
   showInfoContainers("taranaRadio", e)
+);
+apartmentsButton.addEventListener("click", (e) =>
+  showInfoContainers("apartmentsRadio", e)
 );
 engineeringButton.addEventListener("click", (e) =>
   showInfoContainers("engineering", e)

@@ -115,7 +115,7 @@ textarea:focus,
 
 .radioInfo div {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-top: 1.25vh;
 }
@@ -185,7 +185,7 @@ textarea {
   gap: 2px;
 }
 
-Button {
+button {
   min-height: 21.3px;
   font-size: var(--primaryFont);
 }
@@ -195,7 +195,8 @@ Button {
 #clipboardConfirm {
   display: none;
   background-color: var(--background);
-  width: 200px;
+  min-width: 200px;
+  padding: 0 8px;
   position: absolute;
   top: calc(50vh - 25px);
   left: calc(45vw - 100px);

@@ -18,6 +18,7 @@
         <button id="mimosa">Mimosa</button>
         <button id="cambium">Cambium</button>
         <button id="tarana">Tarana</button>
+	  <button id="apartments">Apartments</button>
         <button id="engineeringButton">Engineering</button>
       </div>
       <div class="info">
@@ -232,6 +233,27 @@
           <div>
             <label for="taranaLanSpeeds">LAN Speed:</label>
             <input type="text" list="speeds" id="taranaLanSpeeds" />
+            <datalist id="speeds">
+              <option>10mbps Full-Duplex</option>
+              <option>100mbps Full-Duplex</option>
+              <option>1000mbps Full-Duplex</option>
+              <option>Half-Duplex</option>
+              <option>No Link</option>
+            </datalist>
+          </div>
+        </div>
+	  <div id="apartmentsRadio" class="radioInfo">
+          <div>
+            <label for="apartmentsPing">Ping:</label>
+            <input type="text" id="apartmentsPing" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="apartmentsBandwidth">Bandwidth:</label>
+            <input type="text" id="apartmentsBandwidth" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="apartmentsSpeeds">LAN Speed:</label>
+            <input type="text" list="speeds" id="apartmentsSpeeds"></input>
             <datalist id="speeds">
               <option>10mbps Full-Duplex</option>
               <option>100mbps Full-Duplex</option>
