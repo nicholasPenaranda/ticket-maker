@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tarana TicketMaker</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div id="pageContainer">
+    <div id="infoContainer">
+      <div>Tarana TicketMaker</div>
+      <div id="info">
+        <div id="complaintContainer">
+          <label for="complaint">Complaint:</label>
+          <input type="text" list="complaints" id="complaint" autocomplete="new-password" />
+          <datalist id="complaints">
+            <option>No Connection</option>
+            <option>Intermittent Connection</option>
+            <option>Slow Speeds</option>
+            <option>Router Support</option>
+            <option>Technical Support</option>
+          </datalist>
+        </div>
+        <div class="radioInfo">
+          <div>
+            <label for="connectedAp">Connected AP:</label>
+            <input type="text" id="connectedAp" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="operatorID">Operator ID:</label>
+            <input type="text" id="operatorId" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="sinrDown">SINR Down:</label>
+            <input type="text" id="sinrDown" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="sinrUp">SINR Up:</label>
+            <input type="text" id="sinrUp" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="alignmentMetric">Alignment Metric:</label>
+            <input type="text" id="alignmentMetric" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="pathloss">Pathloss:</label>
+            <input type="text" id="pathloss" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="ping">Ping:</label>
+            <input type="text" id="ping" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="bandwidth">Bandwidth:</label>
+            <input type="text" id="bandwidth" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="lanSpeeds">LAN Speed:</label>
+            <input type="text" list="speeds" id="speed" />
+            <datalist id="speeds">
+              <option>10mbps Full-Duplex</option>
+              <option>100mbps Full-Duplex</option>
+              <option>1000mbps Full-Duplex</option>
+              <option>Half-Duplex</option>
+              <option>No Link</option>
+            </datalist>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="notesContainer">
+      <label for="notes">Notes</label>
+      <textarea id="notes"></textarea>
+    </div>
+    <div id="checklistContainer">
+      <p>Checklist</p>
+      <div id="checklist">
+        <div>
+          <input type="checkbox" id="radioDownAtStart" />
+          <label for="radioDownAtStart">Radio Was Down at the Start</label>
+        </div>
+        <div>
+          <input type="checkbox" id="powerCycleRadio" />
+          <label for="powerCycleRadio">Power Cycle Radio</label>
+        </div>
+        <div>
+          <input type="checkbox" id="powerCycleRouter" />
+          <label for="powerCycleRouter">Power Cycle Router</label>
+        </div>
+        <div>
+          <input type="checkbox" id="customerRouter" />
+          <label for="customerRouter">Customer Owned Router</label>
+        </div>
+        <div>
+          <input type="checkbox" id="reseatCables" />
+          <label for="reseatCables">Reseat Cables</label>
+        </div>
+        <div>
+          <input type="checkbox" id="cablePositions" />
+          <label for="cablePositions">Verified Cable Positions</label>
+        </div>
+        <div>
+          <input type="checkbox" id="cableEnds" />
+          <label for="cableEnds">Checked Cable Ends</label>
+        </div>
+        <div>
+          <input type="checkbox" id="verifiedPower" />
+          <label for="verifiedPower">Verified Power to Equipment</label>
+        </div>
+        <div>
+          <input type="checkbox" id="routerMAC" />
+          <label for="routerMac">Verified Router Mac</label>
+        </div>
+        <div>
+          <input type="checkbox" id="devicesConnected" />
+          <label for="devicesConnected">Devices Connected</label>
+        </div>
+        <div>
+          <input type="checkbox" id="routerFirmware" />
+          <label for="routerFirmware">Upgrade Router Firmware</label>
+        </div>
+        <div>
+          <input type="checkbox" id="radioFirmware" />
+          <label for="radioFirmware">Update Radio Firmware</label>
+        </div>
+        <div>
+          <input type="checkbox" id="movedAp" />
+          <label for="movedAp">Moved AP/PCI</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkedPing" />
+          <label for="checkedPing">Checked Ping</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkedBandwidth" />
+          <label for="checkedBandwidth">Checked Bandwidth</label>
+        </div>
+        <div>
+          <input type="checkbox" id="noAnswer" />
+          <label for="noAnswer">Called No Answer</label>
+        </div>
+        <div>
+          <input type="checkbox" id="leftVoicemail" />
+          <label for="leftVoicemail">Left Voicemail</label>
+        </div>
+        <div>
+          <input type="checkbox" id="refusedToTroubleshoot" />
+          <label for="refusedToTroubleshoot">Refused to Troubleshoot</label>
+        </div>
+        <div>
+          <input type="checkbox" id="radioStillDown" />
+          <label for="radioStillDown">Radio Still Down</label>
+        </div>
+        <div>
+          <input type="checkbox" id="outageMode" />
+          <label for="outageMode">Outage Mode</label>
+        </div>
+      </div>
+    </div>
+    <div id="buttons">
+      <button id="confirm">Confirm</button>
+      <button id="reset">Reset</button>
+    </div>
+    <div id="clipboardConfirm">
+      Text has been copied to clipboard!
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
