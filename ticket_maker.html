@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TicketMaker</title>
+  <link rel="icon" href="favicon.svg" type="any">
   <link rel="stylesheet" href="index.css">
 </head>
 
@@ -18,8 +19,11 @@
         <button id="mimosa">Mimosa</button>
         <button id="cambium">Cambium</button>
         <button id="tarana">Tarana</button>
-	  <button id="apartments">Apartments</button>
+	<button id="apartments">Apartments</button>
         <button id="engineeringButton">Engineering</button>
+        <div id="maintenancePopupButtonContainer">
+          <button id="maintenancePopupButton">Planned Maintenance List</button>
+        </div>
       </div>
       <div class="info">
         <div id="complaintContainer">
@@ -34,6 +38,7 @@
             <option>VOIP</option>
             <option>Billing</option>
             <option>Outage</option>
+            <option>Retention</option>
           </datalist>
         </div>
         <div id="ubiquitiRadio" class="radioInfo">
@@ -206,12 +211,30 @@
             <input type="text" id="connectedAp"></input>
           </div>
           <div>
-            <label for="operatorID">Operator ID:</label>
-            <input type="text" id="operatorID" class="shortInput"></input>
+            <label for="pathloss">Pathloss:</label>
+            <input type="text" id="pathloss" class="shortInput"></input>
           </div>
           <div>
-            <label for="alignmentMetric">Alignment Metric:</label>
-            <input type="text" id="alignmentMetric" class="shortInput"></input>
+            <label for="slaProfile">SLA Profile:</label>
+            <input type="text" list="sla" id="slaProfile" class="shortInput"></input>
+            <datalist id="sla">
+              <option>Min</option>
+              <option>5M</option>
+              <option>10M</option>
+              <option>20M</option>
+              <option>25M</option>
+              <option>50M</option>
+              <option>100M</option>
+              <option>150M</option>
+              <option>200M</option>
+              <option>250M</option>
+              <option>300M</option>
+              <option>400M</option>
+              <option>500M</option>
+              <option>600M</option>
+              <option>1000M</option>
+              <option>Max</option>
+            </datalist>
           </div>
           <div>
             <label for="sinrDown">SINR Down:</label>
@@ -222,16 +245,8 @@
             <input type="text" id="sinrUp" class="shortInput"></input>
           </div>
           <div>
-            <label for="pathloss">Pathloss:</label>
-            <input type="text" id="pathloss" class="shortInput"></input>
-          </div>
-          <div>
-            <label for="taranaPing">Ping:</label>
-            <input type="text" id="taranaPing" class="shortInput"></input>
-          </div>
-          <div>
-            <label for="taranaBandwidth">Bandwidth:</label>
-            <input type="text" id="taranaBandwidth" class="shortInput"></input>
+            <label for="alignmentMetric">Alignment Metric:</label>
+            <input type="text" id="alignmentMetric" class="shortInput"></input>
           </div>
           <div>
             <label for="taranaLanSpeeds">LAN Speed:</label>
@@ -243,6 +258,14 @@
               <option>Half-Duplex</option>
               <option>No Link</option>
             </datalist>
+          </div>
+          <div>
+            <label for="taranaPing">Ping:</label>
+            <input type="text" id="taranaPing" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="taranaBandwidth">Bandwidth:</label>
+            <input type="text" id="taranaBandwidth" class="shortInput"></input>
           </div>
         </div>
 	  <div id="apartmentsRadio" class="radioInfo">
@@ -287,6 +310,10 @@
             <label for="engineeringIP">IP:</label>
             <input type="text" id="engineeringIP"></input>
           </div>
+          <div>
+            <label for="engineeringPackage">Package:</label>
+            <input type="text" id="engineeringPackage"></input>
+          </div>
         </div>
       </div>
     </div>
@@ -295,7 +322,7 @@
       <textarea id="notes"></textarea>
     </div>
     <div id="checklistContainer">
-      <p>Checklist</p>
+      <p class="bold">Checklist</p>
       <div id="checklist">
         <div>
           <input type="checkbox" id="radioDownAtStart" />
@@ -489,6 +516,16 @@
             <input type="radio" id="resetRadioOff" name="resetRadio"></input>
           </div>
         </div>
+        <div class="line spaceBetween">
+          <div>
+            <label for="ttuCheckbox">
+              Test and Turn Up: 
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="ttuCheckbox"></input>
+          </div>
+        </div>
         <div class="spaceBetween">
           <div>
             Restore Default Settings:
@@ -521,7 +558,16 @@
       </div>
     </div>
     <div id="onCallContainer">
-      Tech Supervisor Currently On Call: <span id="onCallSpan"></span>
+      Tech Supervisor Currently On Call: 
+        <span id="onCallSpan"></span>
+        <span id="onCallSVG"><svg id="onCallSVGIcon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" xml:space="preserve" fill="#000000">
+<path d="M479.2,227.6c-13.6,0-24,10.4-24,24c0,112-91.2,203.2-203.2,203.2S48.8,363.6,48.8,251.6 S140,47.6,252,47.6c58.4,0,113.6,28,152,68h-43.2c-13.6,0-24,10.4-24,24s10.4,24,24,24H484v-124c0-13.6-10.4-24-24-24 s-24,10.4-24,24V82C388,30,321.6,0.4,251.2,0.4C112.8,0.4,0,113.2,0,251.6s113.6,251.2,252,251.2S503.2,390,503.2,251.6 C503.2,238,492.8,227.6,479.2,227.6z"/> <path d="M336.8,139.6c0,13.6,10.4,24,24,24h124.8c-34.4-80-115.2-140-210.4-140 c-124.8,0-226.4,101.6-226.4,227.2S150.4,478,276,478s227.2-101.6,227.2-227.2c0-1.6,0-4,0-5.6c-3.2-10.4-12-17.6-23.2-17.6 c-13.6,0-24,10.4-24,24c-0.8,112-92,203.2-204,203.2S48.8,363.6,48.8,251.6S140,47.6,252,47.6c58.4,0,113.6,28,152,68h-43.2 C347.2,115.6,336.8,126,336.8,139.6z"/>
+        </svg>
+      </span>
+    </div>
+    <div id="maintenanceInfoPopup">
+      <div id="maintenanceInfoContainer"></div>
+      <button id="closeMaintenanceInfoPopup">X</button>
     </div>
   </div>
 
