@@ -9,6 +9,8 @@
   --primaryFont: 12px;
   --notesFont: 20px;
   --textColor: #ffffff;
+  --inputTextColor: #000000;
+  --inputBackgroundColor: #ffffff;
 }
 
 body {
@@ -38,7 +40,7 @@ body {
 textarea,
 #infoContainer input {
   border: 1px solid rgba(0,0,0,.12);
-  background: hsla(0,0%,100%,.9);
+  opacity: 0.8;
   box-sizing: border-box;
   outline: none;
   box-shadow: inset 0 1px 0 rgba(0,0,0,.045);
@@ -55,11 +57,11 @@ textarea,
 textarea:focus,
 #infoContainer input:focus {
   border: 1px solid var(--color);
-  background: #fff;
+  opacity: 1;
 }
 
 #infoContainer input:disabled {
-  background: hsla(0,0%,100%,.5)
+  opacity: 0.25;
 }
 
 .info {
@@ -131,6 +133,8 @@ textarea:focus,
 }
 
 input[type="text"] {
+  background: var(--inputBackgroundColor);
+  color: var(--inputTextColor);
   width: 162px;
 }
 
@@ -151,6 +155,8 @@ textarea {
   width: 100%;
   font-family: sans-serif;
   font-size: var(--notesFont);
+  color: var(--inputTextColor);
+  background: var(--inputBackgroundColor);
 }
 
 #checklistContainer {

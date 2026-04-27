@@ -95,9 +95,13 @@
           </div>
         </div>
         <div id="telradRadio" class="radioInfo">
-          <div class="ap">
+          <div>
             <label for="pci">PCI:</label>
-            <input type="text" id="pci"></input>
+            <input type="text" id="pci" class="shortInput"></input>
+          </div>
+          <div>
+            <label for="enode">eNodeB ID:</label>
+            <input type="text" id="enode" class="shortInput"></input>
           </div>
           <div>
             <label for="signal">Signal:</label>
@@ -465,6 +469,14 @@
           <input type="color" id="textColor"></input>
         </div>
         <div class="line spaceBetween">
+          <label for="inputTextColor">Input Text Color:</label>
+          <input type="color" id="inputTextColor"></input>
+        </div>
+        <div class="line spaceBetween">
+          <label for="inputBackgroundColor">Input Background Color:</label>
+          <input type="color" id="inputBackgroundColor"></input>
+        </div>
+        <div class="line spaceBetween">
           <div>
             Reset Prompt:
           </div>
@@ -507,6 +519,9 @@
           No
         </button>
       </div>
+    </div>
+    <div id="onCallContainer">
+      Tech Supervisor Currently On Call: <span id="onCallSpan"></span>
     </div>
   </div>
 

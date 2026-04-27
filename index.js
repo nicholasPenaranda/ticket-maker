@@ -24,6 +24,8 @@ const notesFont = document.getElementById("notesFont")
 const background = document.getElementById("background")
 const foreground = document.getElementById("foreground")
 const textColor = document.getElementById("textColor")
+const inputTextColor = document.getElementById("inputTextColor")
+const inputBackgroundColor = document.getElementById("inputBackgroundColor")
 const resetRadioOn = document.getElementById("resetRadioOn")
 const resetRadioOff = document.getElementById("resetRadioOff")
 const defaultButton = document.getElementById("defaultButton")
@@ -31,20 +33,22 @@ const resetDefaultContainer = document.getElementById("resetDefaultContainer")
 const defaultYes = document.getElementById("defaultYes")
 const defaultNo = document.getElementById("defaultNo")
 const cog = document.getElementById("cog")
-const defaultSettings = {font: "12", notesFont: "20", background: "#212121", foreground: "#303030", textColor: "#ffffff", resetPrompt: true};
+const onCallSpan = document.getElementById("onCallSpan")
+const defaultSettings = {font: "12", notesFont: "20", background: "#212121", foreground: "#303030", textColor: "#ffffff", inputTextColor: "#000000", inputBackgroundColor: "#ffffff", resetPrompt: true};
 let resetPrompt = true;
 let settings = {};
 let currentRadio;
 
-
+// finds the label for the input thats passed as an argument
 function findLable(e) {
-  let idVal = e.id;
+  const idValue = e.id;
   const labels = document.getElementsByTagName("label");
   for (let i = 0; i < labels.length; i++) {
-    if (labels[i].htmlFor == idVal) return labels[i].innerHTML;
+    if (labels[i].htmlFor == idValue) return labels[i].innerHTML;
   }
 }
 
+// creates the checklist for the ticket
 function checklistCreator() {
   if (currentRadio.id === "engineering") return "";
   let troubleList = "Troubleshooting Checklist:\n\n";
@@ -59,6 +63,7 @@ function checklistCreator() {
   return troubleList;
 }
 
+// creates the ticket and adds it to the clipboard
 function createMessage() {
   let info =
     currentRadio.id === "engineering"
@@ -148,6 +153,7 @@ function createMessage() {
   return navigator.clipboard.writeText(completeMessage);
 }
 
+// resets all inputs and text area
 function resetPage() {
   for (let k = 0; k < inputs.length; k++) {
     inputs[k].value = "";
@@ -163,6 +169,7 @@ function resetPage() {
   disable();
 };
 
+// disables inputs if radio still down or outage mode is checked
 function disable() {
   const disableBool = radioStillDown.checked || outageMode.checked;
   for (let l = 0; l < inputs.length; l++) {
@@ -175,6 +182,7 @@ function disable() {
   }
 }
 
+// changes the info containers inputs and page colors based on selected radio
 function showInfoContainers(radio, e = { target: { id: "ubiquiti" } }) {
   const radios = document.querySelectorAll(".radioInfo");
   const radioButtons = document.querySelectorAll("button");
@@ -223,6 +231,7 @@ function showInfoContainers(radio, e = { target: { id: "ubiquiti" } }) {
   }
 }
 
+// sets settings values to current pages values
 function setSettingsTab() {
   font.value = getComputedStyle(
     document.documentElement
@@ -251,40 +260,80 @@ function setSettingsTab() {
   )
     .getPropertyValue("--textColor")
     .trim();
+  inputTextColor.value = getComputedStyle(
+    document.documentElement
+  )
+    .getPropertyValue("--inputTextColor")
+    .trim();
+  inputBackgroundColor.value = getComputedStyle(
+    document.documentElement
+  )
+    .getPropertyValue("--inputBackgroundColor")
+    .trim();
   resetRadioOn.checked = settings.resetPrompt;
   resetRadioOff.checked = !settings.resetPrompt;
   fontExample("font")
   fontExample("notesFont")
 }
 
+// changes the font size in the settings bases on slider input
 function fontExample(element) {
   document.getElementById(element + "Value").innerText = "Size: " + (element === "font" ? + font.value : notesFont.value)
   document.getElementById(element + "Example").style.cssText = "font-size:" + (element === "font" ? font.value : notesFont.value) + "px;"
 }
 
+// stores settings locally in json if settings change
 function updateStorage() {
-  settings = {font: font.value, notesFont: notesFont.value, background: background.value, foreground: foreground.value, textColor: textColor.value, resetPrompt: resetRadioOn.checked}
+  settings = {font: font.value, notesFont: notesFont.value, background: background.value, foreground: foreground.value, textColor: textColor.value, inputTextColor: inputTextColor.value, inputBackgroundColor: inputBackgroundColor.value, resetPrompt: resetRadioOn.checked}
   updateSettings()
   localStorage.setItem("settings", JSON.stringify(settings));
 }
 
+// changes css based on user selected settings
 function updateSettings() {
   document.documentElement.style.setProperty("--primaryFont", settings.font + "px");
   document.documentElement.style.setProperty("--notesFont", settings.notesFont + "px");
   document.documentElement.style.setProperty("--background", settings.background);
   document.documentElement.style.setProperty("--foreground", settings.foreground);
   document.documentElement.style.setProperty("--textColor", settings.textColor);
+  document.documentElement.style.setProperty("--inputTextColor", settings.inputTextColor);
+  document.documentElement.style.setProperty("--inputBackgroundColor", settings.inputBackgroundColor);
   resetPrompt = settings.resetPrompt;
   settingsContainer.style.cssText = "dispaly: none;"
   setSettingsTab()
   cog.style.transform = "rotate(0deg)";
 }
 
+// runs functions on startup
 function startUp() {
-  settings = JSON.parse(localStorage.getItem("settings")) || defaultSettings;
+  const tempSettings = JSON.parse(localStorage.getItem("settings"));
+  settings = tempSettings || defaultSettings;
   setSettingsTab()
   updateSettings()
   showInfoContainers("ubiquitiRadio");
+  setOnCall()
+}
+
+// shows whos on call at the bottom of the page
+function setOnCall() {
+  const setDate = Date.parse("06 Nov 2023")
+  const difference = Date.now() - setDate
+  const weekAlgorithm = Math.floor(difference / 1000 / 60 / 60 / 24 / 7) % 3
+  let current;
+  switch(weekAlgorithm) {
+    case 0:
+      current = "Alina Carrizales";
+      break;
+    case 1:
+      current = "Nicholas Penaranda";
+      break;
+    case 2:
+      current = "Trey Wiggins";
+      break;
+    default:
+      break;
+  }
+  onCallSpan.innerText = current
 }
 
 //listens for reset button press
