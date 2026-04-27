@@ -50,7 +50,7 @@ function checklistCreator() {
   let troubleList = "Troubleshooting Checklist:\n\n";
   let currentInput;
   const checklist = document.getElementById("checklist");
-  for (let j = 0; j < 19; j++) {
+  for (let j = 0; j < checklist.querySelectorAll("input").length - 1; j++) {
     currentInput = checklist.querySelectorAll("input")[j];
     if (currentInput.checked) {
       troubleList += `- ${findLable(currentInput)}\n`;
@@ -63,7 +63,7 @@ function createMessage() {
   let info =
     currentRadio.id === "engineering"
       ? ""
-      : `Complaint: ${complaint.value}\n\n`;
+      : `${complaint.value ? "Complaint: " + complaint.value + "\n\n" : ""}`;
   let currentLabel;
   let currentInput;
   let remoteSignal;
@@ -148,7 +148,7 @@ function createMessage() {
   return navigator.clipboard.writeText(completeMessage);
 }
 
-const resetPage = () => {
+function resetPage() {
   for (let k = 0; k < inputs.length; k++) {
     inputs[k].value = "";
     if (inputs[k].getAttribute("type") === "checkbox") {
